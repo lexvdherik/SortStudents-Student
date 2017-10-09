@@ -13,6 +13,7 @@ import model.Student;
 import nl.hva.dmci.ict.se.datastructures.SelectionSort;
 import nl.hva.dmci.ict.se.datastructures.StudentGenerator;
 import nl.hva.dmci.ict.se.datastructures.util.Schudder;
+import nl.hva.dmci.ict.se.datastructures.dalendeRijen.DalendeRijen;
 
 /**
  *
@@ -27,6 +28,13 @@ public class Main {
         Student[] students = stGen.studentGenerator();
         Schudder.schud(students);
         SelectionSort.SelectionSort(students);
+        
+        List<Student>  list = new ArrayList<>();
+        for (Student student : students) {
+            list.add(student);
+        }
+        DalendeRijen dalendeRijen = new DalendeRijen();
+        System.out.println(dalendeRijen.isStijgend(list));
         for (int i = 0; i < students.length; i++) {
             System.out.println(students[i]);
         }
