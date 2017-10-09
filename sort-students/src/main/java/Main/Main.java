@@ -33,8 +33,12 @@ public class Main {
         for (Student student : students) {
             list.add(student);
         }
+        
         DalendeRijen dalendeRijen = new DalendeRijen();
         System.out.println(dalendeRijen.isStijgend(list));
+        
+        
+        
         for (int i = 0; i < students.length; i++) {
             System.out.println(students[i]);
         }

@@ -14,7 +14,7 @@ import model.Student;
  */
 public class StudentGenerator {
     private int studentNumberStart= 50080001;
-    private static final int NUMBER_OF_STUDENTS = 100;
+    private static final int NUMBER_OF_STUDENTS = 1000;
     private final Student[] studentArray = new Student[NUMBER_OF_STUDENTS];
     
     public Student[] studentGenerator(){
