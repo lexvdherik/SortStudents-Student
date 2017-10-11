@@ -66,5 +66,13 @@ public class Student implements Comparable<Student> {
             return 1;
         }
     }
+    
+    public int compareToStudentNr(Student student) {
+        if (this.studentNumber < student.getStudentNumber()) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
 
 }

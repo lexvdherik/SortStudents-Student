@@ -6,6 +6,7 @@
 package nl.hva.dmci.ict.se.datastructures;
 
 import java.util.Iterator;
+import model.Student;
 
 /**
  *
@@ -23,11 +24,24 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
 
     @Override
     public int compareTo(Object t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Student student = (Student) this.first.item;
+        Student student2 = (Student) t;
+        for (int i = 0; i < student.getKlas().length(); i++) {
+            if (student.getKlas().charAt(i) > student2.getKlas().charAt(i)) {
+                return -1;
+            } else if (student.getKlas().charAt(i) == student2.getKlas().charAt(i)) {
+
+            } else {
+                return 1;
+            }
+        }
+        return 0;
+
     }
 
     // nested class to define nodes
     private class Node {
+
         private Node next;
         private Node prev;
         private Object item;
@@ -44,26 +58,31 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
     }
 
     //add an item to the left end
-    public void add(Object item) {
-        if (first.item == null) {
-            first.item = item;
-        }else{
-            Node oldFirst = first;
-            first = new Node();
-            first.item = item;
-            first.next = oldFirst;
-        }
+    public void add(Object item, int index) {
+        if (index == 0) {
+            if (first.item == null) {
+                first.item = item;
+            } else {
+                Node newNode = first;
+                first = new Node();
+                first.next = newNode;
+                first.item = item;
+            }
+        } else {
+            Node current = first;
+            for (int i = 0; i < index-1; i++) {
+                if (current.next != null) {
+                    current = current.next;
+                }
+            }
+            Node newNode = new Node();
+            newNode.item = item;
+            if (current.next != null) {
+                newNode.next = current.next;
+            }
             
-//        Node oldFirst = first;
-//        first = new Node();
-//        first.item = item;
-//        first.next = oldFirst;
-//        if (isEmpty()) {
-//            last = oldFirst;
-//            oldFirst.prev = first;
-//        } else {
-//            oldFirst.prev = first;
-//        }
+            current.next = newNode;
+        }
         N++;
     }
 
@@ -82,7 +101,7 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
 
         N++;
     }
-    
+
     public Object first() {
         return first.item;
     }
@@ -121,8 +140,7 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
         }
         return a.item; //return item of Node a because that is set to the node that changed right before it changed
     }
-    
-    
+
     @Override
     public Iterator<Object> iterator() {
         return new DoubleEndedQueueIterator();
@@ -146,4 +164,3 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
     }
 
 }
-

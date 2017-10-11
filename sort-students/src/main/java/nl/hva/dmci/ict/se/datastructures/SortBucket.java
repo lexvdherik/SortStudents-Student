@@ -5,11 +5,6 @@
  */
 package nl.hva.dmci.ict.se.datastructures;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import model.Student;
 
 /**
@@ -21,32 +16,60 @@ public class SortBucket {
     public static void sort(Student[] students) {
 
         LinkedList<LinkedList<Student>> buckets = new LinkedList<>();
-        boolean check = false;
+        boolean check = true;
+        int index = 0;
+        int check2 = 0;
         for (int i = 0; i < students.length; i++) {
             if (buckets.isEmpty()) {
                 LinkedList<Student> firstKlas = new LinkedList<>();
-                firstKlas.add(students[i]);
-                buckets.add(firstKlas);
+                firstKlas.add(students[i], index);
+                buckets.add(firstKlas, index);
             } else {
                 for (LinkedList ll : buckets) {
                     Student temp = (Student) ll.first();
                     if (temp.getKlas().equals(students[i].getKlas())) {
-                        ll.add(students[i]);
-                        check = true;
+                        for (Object student : ll) {
+                            Student tempStudent = (Student) student;
+                            if (students[i].compareToStudentNr(tempStudent) == -1 || index+1 == ll.size()) {
+                                ll.add(students[i], index);
+                                index = 0;
+                                break;
+                            } else {
+                                index++;
+                            }
+                        }
+                        index = 0;
+                    } else {
+                        check2++;
+                        if (check2 == buckets.size()) {
+                            check = false;
+                        }
+                        
                     }
                 }
+                check2 = 0;
                 if (!check) {
+                    index = 0;
                     LinkedList<Student> newKlas = new LinkedList<>();
-                    newKlas.add(students[i]);
-                    buckets.add(newKlas);
+                    newKlas.add(students[i], index);
+//                        System.out.println(newKlas.first());
+                    for (LinkedList bucket : buckets) {
+//                            System.out.println(index+"  "+ buckets.size());
+                        if (bucket.compareTo(students[i]) == -1 || index+1 == buckets.size()) {
+                            buckets.add(newKlas, index);
+                            break;
+                        }
+                        index++;
+                    }
                 }
-                check = false;
-
+                check = true;
             }
+
         }
 
+//
         for (LinkedList ll : buckets) {
-            System.out.println(" ");
+            System.out.println("");
             for (Object obj : ll) {
                 System.out.println(obj);
             }
