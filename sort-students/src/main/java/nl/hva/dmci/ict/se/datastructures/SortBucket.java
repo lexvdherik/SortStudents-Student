@@ -15,6 +15,8 @@ public class SortBucket {
 
     public static void sort(Student[] students) {
 
+        Stopwatch stopwatch = new Stopwatch();
+        
         LinkedList<LinkedList<Student>> buckets = new LinkedList<>();//LinkedList of LinkedLists to serve as buckets
         boolean check = true;//to serve as check to check if there is a bucket found with a klas equal to the student's klas
         int index = 0;//to keep track of the index
@@ -69,14 +71,16 @@ public class SortBucket {
             }
 
         }
+        
+        System.out.println(stopwatch.elapsedTime());
 
 //
-        for (LinkedList ll : buckets) {
-            System.out.println("");
-            for (Object obj : ll) {
-                System.out.println(obj);
-            }
-        }
+//        for (LinkedList ll : buckets) {
+//            System.out.println("");
+//            for (Object obj : ll) {
+//                System.out.println(obj);
+//            }
+//        }
 
 //                for (int j = 0; j < buckets.size(); j++) {
 //                    if (buckets.iterator().next().get(j).getFirst().getKlas().equals(students[i].getKlas())) {
