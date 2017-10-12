@@ -24,18 +24,20 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
 
     @Override
     public int compareTo(Object t) {
-        Student student = (Student) this.first.item;
-        Student student2 = (Student) t;
-        for (int i = 0; i < student.getKlas().length(); i++) {
-            if (student.getKlas().charAt(i) > student2.getKlas().charAt(i)) {
+        Student student = (Student) this.first.item;//get the first object from the bucket and cast is to a Student
+        LinkedList<Object> bucket = (LinkedList) t;//cast the param t to a LinkedList called bucket
+        Student student2 = (Student) bucket.first.item;//get the first object of bucket and cast it to a Student
+        for (int i = 0; i < student.getKlas().length(); i++) {//get the klas of student and loop through the chars of the string
+            //compare the i-th char of student versus the i-th char of student2
+            if (student.getKlas().charAt(i) > student2.getKlas().charAt(i)) {//if larger return -1
                 return -1;
-            } else if (student.getKlas().charAt(i) == student2.getKlas().charAt(i)) {
+            } else if (student.getKlas().charAt(i) == student2.getKlas().charAt(i)) {//if equal do nothing
 
-            } else {
+            } else {//else the char has a smaller value. Return 1
                 return 1;
             }
         }
-        return 0;
+        return 0;//return 0 if all chars are equal
 
     }
 
@@ -63,9 +65,9 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
             if (first.item == null) {
                 first.item = item;
             } else {
-                Node newNode = first;
+                Node oldFirst = first;
                 first = new Node();
-                first.next = newNode;
+                first.next = oldFirst;
                 first.item = item;
             }
         } else {
@@ -80,7 +82,6 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
             if (current.next != null) {
                 newNode.next = current.next;
             }
-            
             current.next = newNode;
         }
         N++;
