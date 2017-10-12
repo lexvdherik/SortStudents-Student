@@ -53,17 +53,25 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
 
     //add an item to the left end
     public void add(Object item, int index) {
+        //check if index is 0
         if (index == 0) {
+            //if first is empty fill first
             if (first.item == null) {
                 first.item = item;
-            } else {
+            } 
+            //else create a new first node wich refers to the old first
+            else {
                 Node oldFirst = first;
                 first = new Node();
                 first.next = oldFirst;
                 first.item = item;
             }
-        } else {
+        } 
+        //else set current to first
+        else {
             Node current = first;
+            //loop through the LinkedList until index-1 is reached
+            //and add a new node there
             for (int i = 0; i < index-1; i++) {
                 if (current.next != null) {
                     current = current.next;
@@ -76,6 +84,7 @@ public class LinkedList<Object> implements Iterable<Object>, Comparable<Object> 
             }
             current.next = newNode;
         }
+        //increment N to set the size of the LinkedList
         N++;
     }
 
